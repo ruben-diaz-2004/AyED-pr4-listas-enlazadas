@@ -1,6 +1,6 @@
-// AUTOR: 
-// FECHA: 
-// EMAIL: 
+// AUTOR: Rubén Díaz Marrero
+// FECHA: 10/04/2023
+// EMAIL: alu0101552613@ull.edu.es
 // VERSION: 2.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 4
@@ -108,21 +108,61 @@ double SllPolynomial::Eval(const double x) const {
 }
 
 // Comparación si son iguales dos polinomios representados por listas simples
-bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
-			    const double eps) const {
+bool SllPolynomial::IsEqual(const SllPolynomial& sllpol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  SllPolyNode* aux = get_head();
+  SllPolyNode* aux_2 = sllpol.get_head();
+  int contador{0};
+  while (aux != NULL && aux_2 != NULL) {
+    if (aux->get_next() == NULL && aux_2->get_next() != NULL) return false;
+    else if (aux_2->get_next() == NULL && aux->get_next() != NULL) return false;
 
+    if (fabs(Eval(contador) - sllpol.Eval(contador)) > eps) differents = true;
+    aux = aux->get_next();
+    aux_2 = aux_2->get_next();
+    ++contador;
+  }
   return !differents;
 }
 
 // FASE IV
 // Generar nuevo polinomio suma del polinomio invocante mas otro polinomio
-void SllPolynomial::Sum(const SllPolynomial& sllpol,
-			SllPolynomial& sllpolsum,
-			const double eps) {
-  // poner el código aquí
-
+void SllPolynomial::Sum(const SllPolynomial& sllpol, SllPolynomial& sllpolsum, const double eps) {
+  SllPolyNode* aux = get_head();
+  SllPolyNode* aux_2 = sllpol.get_head();
+  SllPolyNode* aux_result = sllpolsum.get_head();
+  pair_double_t par;
+  while (aux != NULL || aux_2 != NULL) {
+    if (aux != NULL && aux_2 != NULL) {
+      if (aux->get_data().get_inx() == aux_2->get_data().get_inx()) {
+        par.set(aux->get_data().get_val() + aux_2->get_data().get_val(), aux->get_data().get_inx());
+        aux = aux->get_next();
+        aux_2 = aux_2->get_next();
+        // SllPolyNode polynodo(par);
+        // SllPolyNode* nuevo_nodo = new SllPolyNode(polynodo);
+        // sllpolsum.insert_after(aux_prev, nuevo_nodo);
+      } else if (aux->get_data().get_inx() > aux_2->get_data().get_inx()) {
+          par.set(aux_2->get_data().get_val(), aux_2->get_data().get_inx());
+          aux_2 = aux_2->get_next();
+        } else {
+          par.set(aux->get_data().get_val(), aux->get_data().get_inx());
+          aux = aux->get_next();
+        }
+    } else if (aux != NULL) {
+      par.set(aux->get_data().get_val(), aux->get_data().get_inx());
+      aux = aux->get_next();
+    } else {
+      par.set(aux_2->get_data().get_val(), aux_2->get_data().get_inx());
+      aux_2 = aux_2->get_next();
+    }
+    if (sllpolsum.get_head() == NULL) {
+      sllpolsum.push_front(new SllPolyNode(par));
+      aux_result = sllpolsum.get_head();
+    } else {
+      sllpolsum.insert_after(aux_result, new SllPolyNode(par));
+      aux_result = aux_result->get_next();
+    }
+  }
 }
 
 

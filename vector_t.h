@@ -1,6 +1,6 @@
-// AUTOR: 
-// FECHA: 
-// EMAIL: 
+// AUTOR: Rubén Díaz Marrero
+// FECHA: 10/04/2023
+// EMAIL: alu0101552613@ull.edu.es
 // VERSION: 3.1
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 4
