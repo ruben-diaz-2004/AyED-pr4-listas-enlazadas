@@ -68,6 +68,7 @@ template <class T> void sll_t<T>::push_front(sll_node_t<T>* n) {
   head_ = n;
 }
 
+// Saca de la lista el primer nodo y lo devuelve
 template <class T> sll_node_t<T>* sll_t<T>::pop_front(void) { 
   assert(!empty());
   sll_node_t<T>* aux = head_;
@@ -77,6 +78,7 @@ template <class T> sll_node_t<T>* sll_t<T>::pop_front(void) {
   return aux;
 }
 
+// Inserta un nodo en la lista
 template <class T> void sll_t<T>::insert_after(sll_node_t<T>* prev,
 					       sll_node_t<T>* n) {
   assert(prev != NULL && n != NULL);
@@ -85,6 +87,7 @@ template <class T> void sll_t<T>::insert_after(sll_node_t<T>* prev,
   prev->set_next(n);
 }
 
+// Borra un nodo de la lista
 template <class T> sll_node_t<T>* sll_t<T>::erase_after(sll_node_t<T>* prev) { 
   assert(!empty());
   assert(prev != NULL);
@@ -97,6 +100,7 @@ template <class T> sll_node_t<T>* sll_t<T>::erase_after(sll_node_t<T>* prev) {
   return aux;
 }
 
+// Recorre la lista y busca un elemento tipo T
 template <class T> sll_node_t<T>* sll_t<T>::search(const T& d) const {
   sll_node_t<T>* aux = head_;
   while ((aux != NULL) && (aux->get_data() != d))

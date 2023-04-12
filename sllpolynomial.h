@@ -47,8 +47,9 @@ bool IsNotZero(const double val, const double eps = EPS) {
   return fabs(val) > eps;
 }
 
-// FASE II
-// constructor
+/** FASE II
+  * constructor con parámetros
+  */
 SllPolynomial::SllPolynomial(const vector_t<double>& v, const double eps) {
   for (int i{v.get_size() -1}; i >= 0; --i) {
     pair_double_t par;
@@ -93,8 +94,11 @@ std::ostream& operator<<(std::ostream& os, const SllPolynomial& p) {
 
 // Operaciones con polinomios
 
-// FASE III
-// Evaluación de un polinomio representado por lista simple
+/** FASE III
+ *  Evaluación de un polinomio representado por lista simple
+ * @param x. Double valor de las x del polinomio
+ * @return resultado tipo double
+ */
 double SllPolynomial::Eval(const double x) const {
   double result{0.0};
   SllPolyNode* aux = get_head();
@@ -107,7 +111,11 @@ double SllPolynomial::Eval(const double x) const {
   return result;
 }
 
-// Comparación si son iguales dos polinomios representados por listas simples
+/** 
+ * Comparación si son iguales dos polinomios representados por listas simples
+ * @param sllpol. segundo polinomio
+ * @return differents / !differents
+ * */ 
 bool SllPolynomial::IsEqual(const SllPolynomial& sllpol, const double eps) const {
   bool differents = false;
   SllPolyNode* aux = get_head();
@@ -125,8 +133,10 @@ bool SllPolynomial::IsEqual(const SllPolynomial& sllpol, const double eps) const
   return !differents;
 }
 
-// FASE IV
-// Generar nuevo polinomio suma del polinomio invocante mas otro polinomio
+/** FASE IV
+  * Generar nuevo polinomio suma del polinomio invocante mas otro polinomio
+  * @param sllpol, sllpolsum. Segundo polinomio a sumar y polinomio resultado
+  */
 void SllPolynomial::Sum(const SllPolynomial& sllpol, SllPolynomial& sllpolsum, const double eps) {
   SllPolyNode* aux = get_head();
   SllPolyNode* aux_2 = sllpol.get_head();
